@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.URP-Iridescence-Example.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../:\Gits\URP-Iridescence-Example\.idea\.idea.URP-Iridescence-Example\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
