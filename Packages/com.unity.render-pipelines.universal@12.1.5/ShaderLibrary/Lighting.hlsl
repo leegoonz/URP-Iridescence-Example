@@ -233,6 +233,7 @@ half3 CalculateBlinnPhong(Light light, InputData inputData, SurfaceData surfaceD
     return lightColor;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //                      Fragment Functions                                   //
 //       Used by ShaderGraph and others builtin renderers                    //

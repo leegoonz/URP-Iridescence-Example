@@ -6,12 +6,6 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 {
     public static class IridescenceGUI
     {
-        public enum IridescenceMode
-        {
-            None = 0,
-            ThinFilm = 1
-        }
-
         public static class Styles
         {
             public static GUIContent iridescenceText = new GUIContent("Iridescence", "Select the iridescence mode.");
@@ -62,41 +56,28 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
         public static void DoIridescenceArea(IridescenceProperties properties, MaterialEditor materialEditor)
         {
             EditorGUI.BeginChangeCheck();
-            var iridescenceMode = (int)properties.iridescence.floatValue;
-            iridescenceMode = EditorGUILayout.Popup(Styles.iridescenceText, iridescenceMode, Styles.iridescenceModeName);
-            if (EditorGUI.EndChangeCheck())
-                properties.iridescence.floatValue = iridescenceMode;
-
-            if ((IridescenceMode)iridescenceMode == IridescenceMode.ThinFilm)
-            {
-                bool hasThicknessMap = properties.iridescenceThicknessMap.textureValue != null;
-                materialEditor.TexturePropertySingleLine(
+            bool hasThicknessMap = properties.iridescenceThicknessMap.textureValue != null;
+            materialEditor.TexturePropertySingleLine(
                 hasThicknessMap ? Styles.iridescenceThicknessMapText : Styles.iridescenceThicknessText,
                 properties.iridescenceThicknessMap,
                 hasThicknessMap ? properties.iridescenceThicknessRemap : properties.iridescenceThickness);
                 
-                EditorGUI.indentLevel++;
-                materialEditor.ShaderProperty(properties.iridescenceEta2, Styles.iridescenceEta2Text);
-                materialEditor.ShaderProperty(properties.iridescenceEta3, Styles.iridescenceEta3Text);
-                materialEditor.ShaderProperty(properties.iridescenceKappa3, Styles.iridescenceKappa3Text);
-                EditorGUI.indentLevel--;
-            }
+            EditorGUI.indentLevel++;
+            materialEditor.ShaderProperty(properties.iridescenceEta2, Styles.iridescenceEta2Text);
+            materialEditor.ShaderProperty(properties.iridescenceEta3, Styles.iridescenceEta3Text);
+            materialEditor.ShaderProperty(properties.iridescenceKappa3, Styles.iridescenceKappa3Text);
+            EditorGUI.indentLevel--;
         }
 
         public static void SetMaterialKeywords(Material material)
         {
-            if (material.HasProperty("_Iridescence"))
+            if (material.HasProperty("_EnableIridescence") && material.HasProperty("_Iridescence") && material.HasProperty("_IridescenceThicknessMap"))
             {
-                IridescenceMode iridescenceMode = (IridescenceMode)material.GetFloat("_Iridescence");
-
-                CoreUtils.SetKeyword(material, "_IRIDESCENCE", iridescenceMode == IridescenceMode.ThinFilm);
+                bool hasIridescencelMap = material.GetTexture("_DetailAlbedoMap");
+                CoreUtils.SetKeyword(material, "_IRIDESCENCE", material.GetFloat("_EnableIridescence") == 1.0f);
+                
             }
-
-            //if (material.HasProperty("_EnableIridescence"))
-            //    CoreUtils.SetKeyword(material, "_IRIDESCENCE", material.GetFloat("_EnableIridescence") == 1.0f);
-
-            if (material.HasProperty("_IridescenceThicknessMap"))
-                CoreUtils.SetKeyword(material, "_IRIDESCENCE_THICKNESSMAP", material.GetTexture("_IridescenceThicknessMap"));
+            
         }
     }
 }

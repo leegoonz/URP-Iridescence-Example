@@ -32,7 +32,7 @@
         _EmissionColor("Color", Color) = (0,0,0)
         _EmissionMap("Emission", 2D) = "white" {}
 
-        [Enum(None, 0, ThinFilm, 1)] _Iridescence("Iridescence", Float) = 1.0
+        [Toggle(_IRIDESCENCE)] _Iridescence("Iridescence", Float) = 1.0
         _IridescenceThickness("Iridescence Layer Thickness", Range(0.0, 2.5)) = 0.5
         _IridescenceThicknessMap("Iridescence Layer Thickness Map", 2D) = "white" {}
         [MinMax(0, 2.5)] _IridescenceThicknessRemap("Iridescence Layer Thickness Remap", Vector) = (0.3, 1.8, 0.0, 0.0)
@@ -99,8 +99,8 @@
             #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
             #pragma shader_feature _OCCLUSIONMAP
 
-            #pragma shader_feature _IRIDESCENCE
-            #pragma shader_feature _IRIDESCENCE_THICKNESSMAP
+            #pragma shader_feature_local_fragment _IRIDESCENCE
+            #pragma shader_feature_local_fragment _IRIDESCENCE_THICKNESSMAP
 
             #pragma shader_feature _SPECULARHIGHLIGHTS_OFF
             #pragma shader_feature _ENVIRONMENTREFLECTIONS_OFF

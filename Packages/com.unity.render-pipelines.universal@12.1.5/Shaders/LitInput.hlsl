@@ -132,21 +132,6 @@ half SampleOcclusion(float2 uv)
     #endif
 }
 
-half SampleIridescenceThickness(float2 uv)
-{
-    half iridescenceThickness;
-
-#if _IRIDESCENCE_THICKNESSMAP
-    iridescenceThickness = SAMPLE_TEXTURE2D(_IridescenceThicknessMap, sampler_IridescenceThicknessMap, uv).r;
-    iridescenceThickness = _IridescenceThicknessRemap.x + iridescenceThickness * (_IridescenceThicknessRemap.y - _IridescenceThicknessRemap.x);
-#else
-    iridescenceThickness = _IridescenceThickness;
-#endif
-
-    return iridescenceThickness;
-}
-
-
 // Returns clear coat parameters
 // .x/.r == mask
 // .y/.g == smoothness
@@ -260,8 +245,11 @@ inline void InitializeStandardLitSurfaceData(float2 uv, out SurfaceData outSurfa
     outSurfaceData.normalTS = ApplyDetailNormal(detailUv, outSurfaceData.normalTS, detailMask);
 #endif
     
-#if _IRIDESCENCE
-    outSurfaceData.iridescenceThickness = SampleIridescenceThickness(uv);
+#if defined(_IRIDESCENCE)
+    half iridescenceMask = 0;
+    iridescenceMask = SAMPLE_TEXTURE2D(_IridescenceThicknessMap, sampler_IridescenceThicknessMap, uv).r;
+    iridescenceMask = lerp (_IridescenceThicknessRemap.x , _IridescenceThicknessRemap.y , iridescenceMask);
+    outSurfaceData.iridescenceThickness = _IridescenceThickness *  iridescenceMask;
     outSurfaceData.iridescenceEta2 = _IridescneceEta2;
     outSurfaceData.iridescenceEta3 = _IridescneceEta3;
     outSurfaceData.iridescenceKappa3 = _IridescneceKappa3;

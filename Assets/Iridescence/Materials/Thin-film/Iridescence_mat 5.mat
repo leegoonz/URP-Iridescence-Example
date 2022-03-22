@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Iridescence_mat 5
   m_Shader: {fileID: 4800000, guid: b5583d07f471cf844bce227491fca6b3, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_ShaderKeywords: _IRIDESCENCE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -35,7 +35,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 20, y: 20}
+        m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
@@ -46,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _IridescenceThicknessMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8c236fcde7142fe419638025483fd341, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -79,18 +79,18 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Iridescence: 1
-    - _IridescenceThickness: 0.29
-    - _IridescneceEta2: 1.46
-    - _IridescneceEta3: 3.16
+    - _IridescenceThickness: 0.58
+    - _IridescneceEta2: 1.45
+    - _IridescneceEta3: 1.73
     - _IridescneceEta_2: 1.33
     - _IridescneceEta_3: 1
-    - _IridescneceKappa3: 0
+    - _IridescneceKappa3: 0.88
     - _IridescneceKappa_3: 0
-    - _Metallic: 1
+    - _Metallic: 0.899
     - _OcclusionStrength: 0.03
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.784
+    - _Smoothness: 0.853
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -98,9 +98,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9433962, g: 0.8763913, b: 0.63545746, a: 1}
-    - _Color: {r: 0.9056604, g: 0.03759341, b: 0.03759341, a: 1}
+    - _BaseColor: {r: 1, g: 0.64286566, b: 0.011764705, a: 1}
+    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _IridescenceThicknessRemap: {r: 0.18099794, g: 1.180998, b: 0, a: 0}
+    - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 1}
   m_BuildTextureStacks: []
