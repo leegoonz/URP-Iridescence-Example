@@ -238,9 +238,7 @@ GameObject:
   - component: {fileID: 443986663}
   - component: {fileID: 443986666}
   - component: {fileID: 443986662}
-  - component: {fileID: 443986667}
   - component: {fileID: 443986669}
-  - component: {fileID: 443986668}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -289,16 +287,16 @@ Camera:
   m_FOVAxisMode: 0
   m_SensorSize: {x: 21.95, y: 9.35}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 17.447338
+  m_FocalLength: 11.2864485
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 30.000002
+  near clip plane: 0.1
+  far clip plane: 50
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -323,8 +321,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 443986661}
-  m_LocalRotation: {x: 0.0012207292, y: 0.99883235, z: -0.022778124, w: 0.042586375}
-  m_LocalPosition: {x: -0.07636753, y: 0.16152965, z: 0.90385956}
+  m_LocalRotation: {x: -0.0006315678, y: 0.99132884, z: -0.0047678393, w: -0.13131654}
+  m_LocalPosition: {x: 0.23756565, y: 0.11312081, z: 0.4588567}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -364,42 +362,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &443986667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443986661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 868db9f13ac37244195931ef91dc5473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enabled: 1
-  Blend: 0.9375
-  Quality: 4
-  AntiGhosting: 1
-  UseBlurSharpenFilter: 1
-  UseBicubicFilter: 1
-  UseClipAABB: 1
-  UseDilation: 1
-  UseTonemap: 1
-  UseVarianceClipping: 1
-  UseYCoCgSpace: 1
-  Use4Tap: 0
-  Stability: 1.5
-  SharpenStrength: 0.1
-  HistorySharpening: 0.1
---- !u!45 &443986668
-Skybox:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443986661}
-  m_Enabled: 0
-  m_CustomSkybox: {fileID: 2100000, guid: 0ffaa0b7117ba8c47a9d05ae701d4b4d, type: 2}
 --- !u!114 &443986669
 MonoBehaviour:
   m_ObjectHideFlags: 0

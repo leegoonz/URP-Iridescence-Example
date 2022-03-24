@@ -5,9 +5,17 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 {
     internal class LitIridescenceShader : BaseShaderGUI
     {
+        static readonly string[] workflowModeNames = Enum.GetNames(typeof(LitGUI.WorkflowMode));
+        
         // Properties
         private LitGUI.LitProperties litProperties;
         private IridescenceGUI.IridescenceProperties iridescenceProperties;
+        //private LitDetailGUI.LitProperties litDetailProperties;
+        
+        public override void FillAdditionalFoldouts(MaterialHeaderScopeList materialScopesList)
+        {
+
+        }
 
         // collect properties from the material properties
         public override void FindProperties(MaterialProperty[] properties)
@@ -15,37 +23,25 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             base.FindProperties(properties);
             litProperties = new LitGUI.LitProperties(properties);
             iridescenceProperties = new IridescenceGUI.IridescenceProperties(properties);
+          //  litDetailProperties = new LitDetailGUI.LitProperties(properties);
         }
 
         // material changed check
-        public override void MaterialChanged(Material material)
+        // material changed check
+        public override void ValidateMaterial(Material material)
         {
-            if (material == null)
-                throw new ArgumentNullException("material");
-
             SetMaterialKeywords(material, LitGUI.SetMaterialKeywords, IridescenceGUI.SetMaterialKeywords);
         }
 
         // material main surface options
         public override void DrawSurfaceOptions(Material material)
         {
-            if (material == null)
-                throw new ArgumentNullException("material");
-
             // Use default labelWidth
             EditorGUIUtility.labelWidth = 0f;
 
-            // Detect any changes to the material
-            EditorGUI.BeginChangeCheck();
             if (litProperties.workflowMode != null)
-            {
-                DoPopup(LitGUI.Styles.workflowModeText, litProperties.workflowMode, Enum.GetNames(typeof(LitGUI.WorkflowMode)));
-            }
-            if (EditorGUI.EndChangeCheck())
-            {
-                foreach (var obj in blendModeProp.targets)
-                    MaterialChanged((Material)obj);
-            }
+                DoPopup(LitGUI.Styles.workflowModeText, litProperties.workflowMode, workflowModeNames);
+
             base.DrawSurfaceOptions(material);
         }
 
@@ -64,12 +60,8 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
         {
             if (litProperties.reflections != null && litProperties.highlights != null)
             {
-                EditorGUI.BeginChangeCheck();
-                {
-                    materialEditor.ShaderProperty(litProperties.highlights, LitGUI.Styles.highlightsText);
-                    materialEditor.ShaderProperty(litProperties.reflections, LitGUI.Styles.reflectionsText);
-                    EditorGUI.BeginChangeCheck();
-                }
+                materialEditor.ShaderProperty(litProperties.highlights, LitGUI.Styles.highlightsText);
+                materialEditor.ShaderProperty(litProperties.reflections, LitGUI.Styles.reflectionsText);
             }
 
             base.DrawAdvancedOptions(material);
@@ -109,8 +101,17 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
                 surfaceType = SurfaceType.Transparent;
                 blendMode = BlendMode.Alpha;
             }
-            material.SetFloat("_Surface", (float)surfaceType);
             material.SetFloat("_Blend", (float)blendMode);
+
+            material.SetFloat("_Surface", (float)surfaceType);
+            if (surfaceType == SurfaceType.Opaque)
+            {
+                material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            }
+            else
+            {
+                material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            }
 
             if (oldShader.name.Equals("Standard (Specular setup)"))
             {
@@ -126,8 +127,6 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
                 if (texture != null)
                     material.SetTexture("_MetallicSpecGlossMap", texture);
             }
-
-            MaterialChanged(material);
         }
     }
 }

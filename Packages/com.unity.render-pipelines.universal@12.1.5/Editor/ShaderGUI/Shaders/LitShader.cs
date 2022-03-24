@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityEditor.Rendering.Universal.ShaderGUI
 {
-    internal class LitShader : BaseShaderGUI
+    public class LitShader : BaseShaderGUI
     {
         static readonly string[] workflowModeNames = Enum.GetNames(typeof(LitGUI.WorkflowMode));
 

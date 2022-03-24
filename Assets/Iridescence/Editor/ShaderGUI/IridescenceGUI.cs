@@ -8,16 +8,11 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
     {
         public static class Styles
         {
-            public static GUIContent iridescenceText = new GUIContent("Iridescence", "Select the iridescence mode.");
-
             public static GUIContent iridescenceThicknessText = new GUIContent("Thickness",
                 "Thickness of the thin-film. Unit is micrometer, means 0.5 is 500nm.");
 
             public static GUIContent iridescenceThicknessMapText = new GUIContent("Thickness Map",
                 "Specifies the Iridescence Thickness map (R) for this Material.");
-
-            public static GUIContent iridescenceThicknessRemapText = new GUIContent("Remap",
-                "Iridescence Thickness remap");
 
             public static GUIContent iridescenceEta2Text = new GUIContent("Thin-film IOR (η₂)",
                 "Index of refraction of the thin-film.");
@@ -27,13 +22,12 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 
             public static GUIContent iridescenceKappa3Text = new GUIContent("Base IOR (κ₃)",
                 "The imaginary part of the index of refraction of the base layer. Refer to https://refractiveindex.info/ for more information.");
-
-            public static readonly string[] iridescenceModeName = { "None", "Thin-film" };
+            
         }
 
         public struct IridescenceProperties
         {
-            public MaterialProperty iridescence;
+            
             public MaterialProperty iridescenceThickness;
             public MaterialProperty iridescenceThicknessMap;
             public MaterialProperty iridescenceThicknessRemap;
@@ -43,7 +37,6 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 
             public IridescenceProperties(MaterialProperty[] properties)
             {
-                iridescence = BaseShaderGUI.FindProperty("_Iridescence", properties, false);
                 iridescenceThickness = BaseShaderGUI.FindProperty("_IridescenceThickness", properties, false);
                 iridescenceThicknessMap = BaseShaderGUI.FindProperty("_IridescenceThicknessMap", properties, false);
                 iridescenceThicknessRemap = BaseShaderGUI.FindProperty("_IridescenceThicknessRemap", properties, false);

@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 namespace UnityEditor.Rendering.Universal.ShaderGUI
 {
-    internal class LitDetailGUI
+    public class LitDetailGUI
     {
         public static class Styles
         {
